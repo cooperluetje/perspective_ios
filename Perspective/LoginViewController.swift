@@ -46,7 +46,7 @@ class LoginViewController: UIViewController
                 defaults.setValue(encodedData, forKey: key)
                 defaults.synchronize()
                 
-                //performSegue(withIdentifier: "mainView", sender: self)
+                performSegue(withIdentifier: "login", sender: self)
                 
                 usernameTextField.text = ""
                 passwordTextField.text = ""

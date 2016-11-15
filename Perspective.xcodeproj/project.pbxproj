@@ -17,6 +17,10 @@
 		3C913C571DDAAF2A00C11713 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C561DDAAF2A00C11713 /* SessionService.swift */; };
 		3C913C5A1DDAAFA400C11713 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C591DDAAFA400C11713 /* User.swift */; };
 		3C913C5C1DDAB40600C11713 /* ApiRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */; };
+		3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */; };
+		3C913C611DDACEF200C11713 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C601DDACEF200C11713 /* HeaderTableViewCell.swift */; };
+		3C913C631DDACEFE00C11713 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C621DDACEFE00C11713 /* ImageTableViewCell.swift */; };
+		3C913C651DDACF1000C11713 /* FooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C641DDACF1000C11713 /* FooterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		3C913C561DDAAF2A00C11713 /* SessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		3C913C591DDAAFA400C11713 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRoutes.swift; sourceTree = "<group>"; };
+		3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		3C913C601DDACEF200C11713 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		3C913C621DDACEFE00C11713 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		3C913C641DDACF1000C11713 /* FooterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 		3C5404921DB6FFC600253A00 /* Perspective */ = {
 			isa = PBXGroup;
 			children = (
+				3C913C5F1DDACECD00C11713 /* cell */,
 				3C913C581DDAAF9200C11713 /* model */,
 				3C913C531DDA3C5800C11713 /* controller */,
 				3C5404931DB6FFC600253A00 /* AppDelegate.swift */,
@@ -112,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				3C913C541DDA3C7700C11713 /* LoginViewController.swift */,
+				3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -122,6 +132,16 @@
 				3C913C591DDAAFA400C11713 /* User.swift */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		3C913C5F1DDACECD00C11713 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				3C913C601DDACEF200C11713 /* HeaderTableViewCell.swift */,
+				3C913C621DDACEFE00C11713 /* ImageTableViewCell.swift */,
+				3C913C641DDACF1000C11713 /* FooterTableViewCell.swift */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,10 +247,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C913C611DDACEF200C11713 /* HeaderTableViewCell.swift in Sources */,
 				3C913C571DDAAF2A00C11713 /* SessionService.swift in Sources */,
+				3C913C651DDACF1000C11713 /* FooterTableViewCell.swift in Sources */,
 				3C913C551DDA3C7700C11713 /* LoginViewController.swift in Sources */,
+				3C913C631DDACEFE00C11713 /* ImageTableViewCell.swift in Sources */,
 				3C913C521DDA3B0B00C11713 /* Request.swift in Sources */,
 				3C913C5A1DDAAFA400C11713 /* User.swift in Sources */,
+				3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */,
 				3C913C5C1DDAB40600C11713 /* ApiRoutes.swift in Sources */,
 				3C5404941DB6FFC600253A00 /* AppDelegate.swift in Sources */,
 			);
