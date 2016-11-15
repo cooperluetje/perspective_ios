@@ -21,9 +21,13 @@ class PerspectiveTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLoginSuccess()
+    {
+        let sessionService = SessionService()
+        
+        let user = sessionService.login(username: "koopaluigi", password: "toadstool")
+        
+        XCTAssertFalse(user.id == -1)
     }
     
     func testPerformanceExample() {
