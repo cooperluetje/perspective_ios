@@ -27,12 +27,12 @@ class SessionService
     
     func login(username:String, password:String) -> User
     {
-        var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "")
+        var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
         let request = DispatchGroup.init()
         
         let url = apiRoutes.session.login
         
-        let innerParams = ["username" : username, "password" : password, "remember_me" : "0"]
+        let innerParams = ["username" : username, "password" : password, "remember_me" : "1"]
         
         let params = ["session" : innerParams]
         
@@ -67,7 +67,8 @@ class SessionService
             let username = val.value(forKey: "username")! as! String
             let created_at = val.value(forKey: "created_at")! as! String
             let updated_at = val.value(forKey: "updated_at") as! String
-            user = User(id: id, name: name, email: email, username: username, created_at: created_at, updated_at: updated_at)
+            let auth_token = val.value(forKey: "remember_digest") as! String
+            user = User(id: id, name: name, email: email, username: username, created_at: created_at, updated_at: updated_at, auth_token: auth_token)
         }
         
         if requests.postDictionary["error"] != nil

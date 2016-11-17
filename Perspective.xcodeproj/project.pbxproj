@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4FC59D1DDBEF8C00840A3E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4FC59C1DDBEF8C00840A3E /* UserService.swift */; };
+		3C4FC59F1DDE280800840A3E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4FC59E1DDE280800840A3E /* Post.swift */; };
 		3C5404941DB6FFC600253A00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5404931DB6FFC600253A00 /* AppDelegate.swift */; };
 		3C5404991DB6FFC600253A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5404971DB6FFC600253A00 /* Main.storyboard */; };
 		3C54049B1DB6FFC600253A00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54049A1DB6FFC600253A00 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C4FC59C1DDBEF8C00840A3E /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		3C4FC59E1DDE280800840A3E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3C5404901DB6FFC600253A00 /* Perspective.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Perspective.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5404931DB6FFC600253A00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C5404981DB6FFC600253A00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,8 +105,9 @@
 				3C54049A1DB6FFC600253A00 /* Assets.xcassets */,
 				3C54049C1DB6FFC600253A00 /* LaunchScreen.storyboard */,
 				3C54049F1DB6FFC600253A00 /* Info.plist */,
-				3C913C511DDA3B0B00C11713 /* Request.swift */,
 				3C913C561DDAAF2A00C11713 /* SessionService.swift */,
+				3C4FC59C1DDBEF8C00840A3E /* UserService.swift */,
+				3C913C511DDA3B0B00C11713 /* Request.swift */,
 				3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */,
 			);
 			path = Perspective;
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				3C913C591DDAAFA400C11713 /* User.swift */,
+				3C4FC59E1DDE280800840A3E /* Post.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -250,9 +256,11 @@
 				3C913C611DDACEF200C11713 /* HeaderTableViewCell.swift in Sources */,
 				3C913C571DDAAF2A00C11713 /* SessionService.swift in Sources */,
 				3C913C651DDACF1000C11713 /* FooterTableViewCell.swift in Sources */,
+				3C4FC59F1DDE280800840A3E /* Post.swift in Sources */,
 				3C913C551DDA3C7700C11713 /* LoginViewController.swift in Sources */,
 				3C913C631DDACEFE00C11713 /* ImageTableViewCell.swift in Sources */,
 				3C913C521DDA3B0B00C11713 /* Request.swift in Sources */,
+				3C4FC59D1DDBEF8C00840A3E /* UserService.swift in Sources */,
 				3C913C5A1DDAAFA400C11713 /* User.swift in Sources */,
 				3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */,
 				3C913C5C1DDAB40600C11713 /* ApiRoutes.swift in Sources */,

@@ -16,8 +16,9 @@ class User: NSObject , NSCoding
     var username:String
     var created_at:String
     var updated_at:String
+    var auth_token:String
     
-    init(id:Int, name:String, email:String, username:String, created_at:String, updated_at:String)
+    init(id:Int, name:String, email:String, username:String, created_at:String, updated_at:String, auth_token:String)
     {
         self.id = id
         self.name = name
@@ -25,6 +26,7 @@ class User: NSObject , NSCoding
         self.username = username
         self.created_at = created_at
         self.updated_at = updated_at
+        self.auth_token = auth_token
         
         super.init()
     }
@@ -37,8 +39,9 @@ class User: NSObject , NSCoding
         let username = aDecoder.decodeObject(forKey: "username") as! String
         let created_at = aDecoder.decodeObject(forKey: "created_at") as! String
         let updated_at = aDecoder.decodeObject(forKey: "updated_at") as! String
+        let auth_token = aDecoder.decodeObject(forKey: "auth_token") as! String
         
-        self.init(id:id, name:name, email:email, username:username, created_at:created_at, updated_at:updated_at)
+        self.init(id:id, name:name, email:email, username:username, created_at:created_at, updated_at:updated_at, auth_token:auth_token)
     }
     
     func encode(with aCoder: NSCoder)
@@ -49,6 +52,7 @@ class User: NSObject , NSCoding
         aCoder.encode(self.username, forKey: "username")
         aCoder.encode(self.created_at, forKey: "created_at")
         aCoder.encode(self.updated_at, forKey: "updated_at")
+        aCoder.encode(self.auth_token, forKey: "auth_token")
     }
     
 }

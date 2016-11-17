@@ -8,16 +8,27 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
-
+class HomeTableViewController: UITableViewController
+{
+    var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
+    var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //Get user info
+        let defaults = UserDefaults.standard
+        let key = "user"
+        if defaults.object(forKey: key) != nil
+        {
+            if let value = defaults.object(forKey: key) as? NSData
+            {
+                user = NSKeyedUnarchiver.unarchiveObject(with: value as Data) as! User
+                userService = UserService(user: user)
+            }
+        }
+        
+        userService.getUserFeed(user_id: user.id, page_num: 1)
     }
 
     override func didReceiveMemoryWarning() {
