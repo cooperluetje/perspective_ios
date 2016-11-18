@@ -1,5 +1,5 @@
 //
-//  FooterTableViewCell.swift
+//  HeaderTableViewCell.swift
 //  Perspective
 //
 //  Created by Cooper Luetje on 11/15/16.
@@ -8,10 +8,14 @@
 
 import UIKit
 
-class FooterTableViewCell: UITableViewCell
+class MainTableViewCell: UITableViewCell
 {
     // MARK: Properties
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
+    
     
 
     override func awakeFromNib() {

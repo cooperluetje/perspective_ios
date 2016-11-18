@@ -105,28 +105,40 @@
             </objects>
             <point key="canvasLocation" x="758" y="130"/>
         </scene>
-        <!--Home Table View Controller-->
+        <!--PERSPECTIVE-->
         <scene sceneID="AJk-U1-gCE">
             <objects>
                 <tableViewController id="j9r-SX-Lc9" customClass="HomeTableViewController" customModule="Perspective" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="naQ-5P-Cz3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="464" sectionHeaderHeight="28" sectionFooterHeight="28" id="naQ-5P-Cz3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="44" id="MOX-zp-El0" customClass="HeaderTableViewCell" customModule="Perspective" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" id="MOX-zp-El0" customClass="MainTableViewCell" customModule="Perspective" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MOX-zp-El0" id="Kie-YE-JcP">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="464"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JcX-gK-BK0">
-                                            <frame key="frameInset" minX="8" minY="8" width="27" height="27"/>
+                                            <frame key="frameInset" width="45" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nH5-Yx-ghF">
+                                            <frame key="frameInset" minY="45" width="375" height="375"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.95401722690000001" green="0.95401722690000001" blue="0.95401722690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rX-2E-ezT">
+                                            <frame key="frameInset" minX="8" minY="428" width="145" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4T-T9-vO0">
-                                            <frame key="frameInset" minX="43" minY="11" width="241" height="21"/>
+                                            <frame key="frameInset" minX="51" minY="12" width="241" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -135,45 +147,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="userImage" destination="JcX-gK-BK0" id="xUm-tx-WPh"/>
-                                    <outlet property="usernameLabel" destination="V4T-T9-vO0" id="a9C-V1-hza"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="376" id="kkA-Ef-NEx" customClass="ImageTableViewCell" customModule="Perspective" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="136" width="375" height="376"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kkA-Ef-NEx" id="eOb-JM-Vgh">
-                                    <frame key="frameInset" width="375" height="376"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cen-Qs-z5l">
-                                            <frame key="frameInset" width="375" height="375"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="mainImage" destination="cen-Qs-z5l" id="Zqd-fl-vuu"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="footerCell" id="apl-d9-FyX" customClass="FooterTableViewCell" customModule="Perspective" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="512" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="apl-d9-FyX" id="kEj-aj-YHs">
-                                    <frame key="frameInset" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxv-II-vCk">
-                                            <frame key="frameInset" minX="8" minY="11" width="174" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="dateLabel" destination="xxv-II-vCk" id="3F8-hw-NFR"/>
+                                    <outlet property="dateLabel" destination="3rX-2E-ezT" id="MxO-2k-yvt"/>
+                                    <outlet property="mainImage" destination="nH5-Yx-ghF" id="OOy-tX-jIr"/>
+                                    <outlet property="userImage" destination="JcX-gK-BK0" id="Sat-oO-SwC"/>
+                                    <outlet property="usernameLabel" destination="V4T-T9-vO0" id="VEa-8F-sA3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -183,11 +160,11 @@
                             <outlet property="delegate" destination="j9r-SX-Lc9" id="m16-Kk-3qC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LNb-qc-ELY"/>
+                    <navigationItem key="navigationItem" title="PERSPECTIVE" id="LNb-qc-ELY"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvf-Hx-rjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="-278"/>
+            <point key="canvasLocation" x="2580" y="-278.41079460269867"/>
         </scene>
         <!--Home-->
         <scene sceneID="fFm-ha-4a0">

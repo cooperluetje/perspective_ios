@@ -53,7 +53,7 @@ class UserService
         // If user exist in the returned data from POST
         if requests.getDictionary["user"] != nil && (requests.getDictionary["user"]! as AnyObject).count != 0
         {
-            let val = requests.postDictionary.value(forKey: "user")! as AnyObject
+            let val = requests.getDictionary.value(forKey: "user")! as AnyObject
             let id = val.value(forKey: "id") as! Int
             let name = val.value(forKey: "name")! as! String
             let email = val.value(forKey: "email")! as! String

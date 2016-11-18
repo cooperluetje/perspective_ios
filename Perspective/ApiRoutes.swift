@@ -14,6 +14,7 @@ class ApiRoutes
     var user:User
     var posts:Posts
     var homeUrl:String
+    var gravatarUrl:String
     
     init()
     {
@@ -21,6 +22,7 @@ class ApiRoutes
         self.user = User()
         self.posts = Posts()
         self.homeUrl = "https://perspective-koopaluigi.c9users.io"
+        self.gravatarUrl = "https://www.gravatar.com/avatar/"
     }
     
     struct Session

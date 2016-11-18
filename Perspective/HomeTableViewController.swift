@@ -12,9 +12,16 @@ class HomeTableViewController: UITableViewController
 {
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
+    var apiRoutes = ApiRoutes()
+    var feed:[Post] = []
+    var page_num = 1
+    var currentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set title font
+        //self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "CaviarDreams", size: 20)!]
 
         //Get user info
         let defaults = UserDefaults.standard
@@ -28,7 +35,8 @@ class HomeTableViewController: UITableViewController
             }
         }
         
-        userService.getUserFeed(user_id: user.id, page_num: 1)
+        feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
+        page_num += 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,59 +48,79 @@ class HomeTableViewController: UITableViewController
 
     override func numberOfSections(in tableView: UITableView) -> Int
     {
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 3
+        return feed.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = UITableViewCell()
-        if indexPath.row % 3 == 0
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
+        let post = feed[indexPath.row]
+        let user = userService.getUser(user_id: post.user_id)
+        let gravatarData = MD5(string: user.email)
+        let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
+        var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
+        var data = Data()
+        do
         {
-            let headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderTableViewCell
-            headerCell.userImage.image = #imageLiteral(resourceName: "HomeIcon")
-            headerCell.usernameLabel.text = "USERNAME"
-            return headerCell
+            data = try Data(contentsOf: url!)
         }
-        else if indexPath.row % 3 == 1
+        catch let error as NSError
         {
-            let imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageTableViewCell
-            imageCell.mainImage.image = #imageLiteral(resourceName: "HomeIcon")
-            return imageCell
+            print("ERROR: \(error.localizedDescription)")
         }
-        else if indexPath.row % 3 == 2
+        if data.count != 0
         {
-            let footerCell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath) as! FooterTableViewCell
-            footerCell.dateLabel.text = "DATE"
-            
-            let bottom_border = UIView(frame: CGRect(x: 0, y: 40, width: self.view.bounds.width, height: 1))
-            bottom_border.backgroundColor = UIColor.lightGray
-            footerCell.addSubview(bottom_border)
-            
-            return footerCell
+            cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
+            cell.userImage.image = UIImage(data: data)
         }
+        cell.usernameLabel.text = user.username
+        
+        url = URL(string: apiRoutes.homeUrl + post.picture_url)
+        data = Data()
+        do
+        {
+            data = try Data(contentsOf: url!)
+        }
+        catch let error as NSError
+        {
+            print("ERROR: \(error.localizedDescription)")
+        }
+        if data.count != 0
+        {
+            cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
+            cell.mainImage.image = UIImage(data: data)
+        }
+        
+        /*
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sssz"
+         let date = dateFormatter!.date(from: post.created_at)!
+         dateFormatter.dateFormat = "MM-dd-yyyy"
+         */
+        cell.dateLabel.text = post.created_at
+        
+        let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
+        bottom_border.backgroundColor = UIColor.lightGray
+        cell.addSubview(bottom_border)
+        
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    //For gravatar
+    func MD5(string: String) -> Data?
     {
-        if indexPath.row % 3 == 0
-        {
-            return 44
+        guard let messageData = string.data(using:String.Encoding.utf8) else { return nil}
+        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
+        
+        _ = digestData.withUnsafeMutableBytes {digestBytes in messageData.withUnsafeBytes {messageBytes in CC_MD5(messageBytes, CC_LONG(messageData.count), digestBytes)
+            }
         }
-        else if indexPath.row % 3 == 1
-        {
-            return 376
-        }
-        else if indexPath.row % 3 == 2
-        {
-            return 44
-        }
-        return 44
+        return digestData
     }
 
 }
