@@ -12,6 +12,7 @@ class HomeTableViewController: UITableViewController
 {
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var apiRoutes = ApiRoutes()
     var feed:[Post] = []
     var page_num = 1
@@ -37,6 +38,17 @@ class HomeTableViewController: UITableViewController
         
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
         page_num += 1
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        if indexPath.row == feed.count
+        {
+            feed.append(contentsOf: userService.getUserFeed(user_id: user.id, page_num: page_num))
+            page_num += 1
+            tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,62 +65,87 @@ class HomeTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return feed.count
+        return feed.count+1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
-        let post = feed[indexPath.row]
-        let user = userService.getUser(user_id: post.user_id)
-        let gravatarData = MD5(string: user.email)
-        let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
-        var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
-        var data = Data()
-        do
+        if indexPath.row <= feed.count-1
         {
-            data = try Data(contentsOf: url!)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
+            let post = feed[indexPath.row]
+            let user = userService.getUser(user_id: post.user_id)
+            let gravatarData = MD5(string: user.email)
+            let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
+            var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
+            var data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
+                cell.userImage.image = UIImage(data: data)
+            }
+            cell.usernameLabel.text = user.username
+            
+            url = URL(string: apiRoutes.homeUrl + post.picture_url)
+            data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
+                cell.mainImage.image = UIImage(data: data)
+            }
+            
+            /*
+             let dateFormatter = DateFormatter()
+             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sssz"
+             let date = dateFormatter!.date(from: post.created_at)!
+             dateFormatter.dateFormat = "MM-dd-yyyy"
+             */
+            cell.dateLabel.text = post.created_at
+            
+            let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
+            bottom_border.backgroundColor = UIColor.lightGray
+            cell.addSubview(bottom_border)
+            
+            return cell
         }
-        catch let error as NSError
+        else
         {
-            print("ERROR: \(error.localizedDescription)")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) 
+            
+            indicator.startAnimating()
+            indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)
+            cell.addSubview(indicator)
+            
+            return cell
         }
-        if data.count != 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if indexPath.row > feed.count-1
         {
-            cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
-            cell.userImage.image = UIImage(data: data)
+            return 44
         }
-        cell.usernameLabel.text = user.username
-        
-        url = URL(string: apiRoutes.homeUrl + post.picture_url)
-        data = Data()
-        do
+        else
         {
-            data = try Data(contentsOf: url!)
+            return 464
         }
-        catch let error as NSError
-        {
-            print("ERROR: \(error.localizedDescription)")
-        }
-        if data.count != 0
-        {
-            cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
-            cell.mainImage.image = UIImage(data: data)
-        }
-        
-        /*
-         let dateFormatter = DateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sssz"
-         let date = dateFormatter!.date(from: post.created_at)!
-         dateFormatter.dateFormat = "MM-dd-yyyy"
-         */
-        cell.dateLabel.text = post.created_at
-        
-        let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
-        bottom_border.backgroundColor = UIColor.lightGray
-        cell.addSubview(bottom_border)
-        
-        return cell
     }
     
     //For gravatar
