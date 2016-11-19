@@ -129,7 +129,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             }
             if data.count != 0
             {
-                cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
+                //cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
                 cell.mainImage.image = UIImage(data: data)
             }
             
