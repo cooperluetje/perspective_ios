@@ -50,6 +50,7 @@ class ApiRoutes
         var getUser:String                  // GET     (use id)    ()
         var createUser:String               // POST    ()          (name, email, username, password, password_confirmation)
         var getFeed:String                  // GET     (id and page)
+        var updateLocation:String           // POST    ()          (latitude, longitude)
         
         init()
         {
@@ -57,6 +58,7 @@ class ApiRoutes
             getUser = api + "/"
             createUser = api + "/"
             getFeed = api + ""
+            updateLocation = "https://perspective-koopaluigi.c9users.io/api/locations"
         }
         
         func indexForId() -> String.Index

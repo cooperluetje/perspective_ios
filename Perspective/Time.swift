@@ -22,7 +22,7 @@ class Time
     {
         let minutes_in_seconds:Double = 60.0
         let hours_in_seconds:Double = minutes_in_seconds * 60.0
-        let day_in_seconds:Double = hours_in_seconds
+        let day_in_seconds:Double = hours_in_seconds * 24.0
         let month_in_seconds:Double = day_in_seconds * 30.0
         let year_in_seconds:Double = day_in_seconds * 365.0
         var returnString = ""
@@ -33,7 +33,7 @@ class Time
         
         if seconds < 59.0
         {
-            returnString = "\(seconds) seconds ago"
+            returnString = "\(Int(round(seconds))) seconds ago"
         }
         else if seconds < minutes_in_seconds + (minutes_in_seconds - 1)
         {

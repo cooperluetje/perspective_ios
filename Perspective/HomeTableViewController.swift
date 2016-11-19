@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
-class HomeTableViewController: UITableViewController
+class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
 {
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
     let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let locationManager = CLLocationManager()
     var apiRoutes = ApiRoutes()
     var time = Time()
     var feed:[Post] = []
@@ -37,12 +39,33 @@ class HomeTableViewController: UITableViewController
             }
         }
         
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            let location:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
+            userService.updateLocation(latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+        }
+        
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
         page_num += 1
         
-        indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)
+        indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)        
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
         
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        //let location = manager.location?.coordinate
+    }
+    
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {

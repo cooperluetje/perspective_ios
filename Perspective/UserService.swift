@@ -187,4 +187,45 @@ class UserService
         return posts
     }
     
+    func updateLocation(latitude:String, longitude:String, auth_token:String)
+    {
+        let request = DispatchGroup.init()
+        
+        let url = apiRoutes.user.updateLocation
+        
+        let innerParams = ["latitude" : latitude, "longitude" : longitude]
+        
+        let params = ["authenticity_token" : auth_token, "location" : innerParams] as [String : Any]
+        
+        var jsonData:Data = Data()
+        do
+        {
+            jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        }
+        catch let error as NSError
+        {
+            print("ERROR: \(error.localizedDescription)")
+        }
+        
+        let headers = ["Content-Type" : "application/json"]
+        
+        request.enter()
+        
+        requests.postRequest(url: url, params: (params as [String : AnyObject]?)!, headers: headers, jsonData: jsonData, finished: {
+            () in
+            request.leave()
+        })
+        
+        request.wait()
+        
+        if requests.postDictionary["error"] != nil
+        {
+            error = requests.postDictionary.value(forKey: "error")! as! String
+        }
+        else
+        {
+            error = ""
+        }
+    }
+    
 }
