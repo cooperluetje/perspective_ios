@@ -22,6 +22,7 @@
 		3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */; };
 		3C913C611DDACEF200C11713 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C601DDACEF200C11713 /* MainTableViewCell.swift */; };
 		3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */; };
+		3CEA0C8F1DDFE4D2004316B8 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8E1DDFE4D2004316B8 /* Time.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		3C913C601DDACEF200C11713 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		3CC6C6811DDE968F0062F39F /* Perspective-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Perspective-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3CEA0C8E1DDFE4D2004316B8 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				3C913C511DDA3B0B00C11713 /* Request.swift */,
 				3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */,
 				3CC6C6811DDE968F0062F39F /* Perspective-Bridging-Header.h */,
+				3CEA0C8E1DDFE4D2004316B8 /* Time.swift */,
 			);
 			path = Perspective;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEA0C8F1DDFE4D2004316B8 /* Time.swift in Sources */,
 				3C913C611DDACEF200C11713 /* MainTableViewCell.swift in Sources */,
 				3C913C571DDAAF2A00C11713 /* SessionService.swift in Sources */,
 				3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */,

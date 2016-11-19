@@ -14,6 +14,7 @@ class HomeTableViewController: UITableViewController
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
     let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var apiRoutes = ApiRoutes()
+    var time = Time()
     var feed:[Post] = []
     var page_num = 1
     var currentIndex = 0
@@ -38,6 +39,8 @@ class HomeTableViewController: UITableViewController
         
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
         page_num += 1
+        
+        indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)
         
     }
     
@@ -116,7 +119,7 @@ class HomeTableViewController: UITableViewController
              let date = dateFormatter!.date(from: post.created_at)!
              dateFormatter.dateFormat = "MM-dd-yyyy"
              */
-            cell.dateLabel.text = post.created_at
+            cell.dateLabel.text = time.timeAgoInWords(dateString: post.created_at)
             
             let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
             bottom_border.backgroundColor = UIColor.lightGray
@@ -129,7 +132,6 @@ class HomeTableViewController: UITableViewController
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) 
             
             indicator.startAnimating()
-            indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)
             cell.addSubview(indicator)
             
             return cell
