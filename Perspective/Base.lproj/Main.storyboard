@@ -101,6 +101,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="vm0-lQ-1ah" kind="relationship" relationship="viewControllers" id="eHT-H1-iwR"/>
+                        <segue destination="lit-Ha-iCu" kind="relationship" relationship="viewControllers" id="Bs5-F1-2lQ"/>
                         <segue destination="JaA-MD-pcq" kind="relationship" relationship="viewControllers" id="QqM-5z-FQv"/>
                     </connections>
                 </tabBarController>
@@ -108,10 +109,10 @@
             </objects>
             <point key="canvasLocation" x="758" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--PERSPECTIVE-->
         <scene sceneID="JUj-cF-Pbj">
             <objects>
-                <viewController id="4tM-FQ-0sB" sceneMemberID="viewController">
+                <viewController id="4tM-FQ-0sB" customClass="CameraViewController" customModule="Perspective" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mpw-aO-ECn"/>
                         <viewControllerLayoutGuide type="bottom" id="kBb-mq-Vmi"/>
@@ -119,12 +120,36 @@
                     <view key="view" contentMode="scaleToFill" id="qUG-IP-gQ1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn4-MI-axr">
+                                <rect key="frame" x="144" y="556" width="86" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <action selector="photoButton:" destination="4tM-FQ-0sB" eventType="touchUpInside" id="ICJ-SP-GE0"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tgh-P6-ipE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W7H-L2-c0a">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="PERSPECTIVE" id="ltc-ew-6Ab"/>
+                    <connections>
+                        <outlet property="cameraView" destination="Tgh-P6-ipE" id="6qk-2o-zJU"/>
+                        <outlet property="previewView" destination="W7H-L2-c0a" id="Uhc-7L-UBE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKK-cu-pQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1710" y="386"/>
+            <point key="canvasLocation" x="2580" y="384.55772113943033"/>
         </scene>
         <!--PERSPECTIVE-->
         <scene sceneID="AJk-U1-gCE">
@@ -217,6 +242,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sv0-ea-dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1710" y="-278"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="J1O-Cd-CMT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lit-Ha-iCu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Camera" id="oZH-MY-VaB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1qc-ke-Jsw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4tM-FQ-0sB" kind="relationship" relationship="rootViewController" id="oL3-AX-QCs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZX-mB-fc1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1709.5999999999999" y="385.45727136431788"/>
         </scene>
     </scenes>
     <resources>

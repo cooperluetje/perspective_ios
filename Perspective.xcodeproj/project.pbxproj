@@ -23,6 +23,7 @@
 		3C913C611DDACEF200C11713 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C601DDACEF200C11713 /* MainTableViewCell.swift */; };
 		3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */; };
 		3CEA0C8F1DDFE4D2004316B8 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8E1DDFE4D2004316B8 /* Time.swift */; };
+		3CEA0C911DE0344E004316B8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C901DE0344E004316B8 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		3CC6C6811DDE968F0062F39F /* Perspective-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Perspective-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3CEA0C8E1DDFE4D2004316B8 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		3CEA0C901DE0344E004316B8 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				3C913C541DDA3C7700C11713 /* LoginViewController.swift */,
 				3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */,
 				3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */,
+				3CEA0C901DE0344E004316B8 /* CameraViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				3C913C611DDACEF200C11713 /* MainTableViewCell.swift in Sources */,
 				3C913C571DDAAF2A00C11713 /* SessionService.swift in Sources */,
 				3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */,
+				3CEA0C911DE0344E004316B8 /* CameraViewController.swift in Sources */,
 				3C4FC59F1DDE280800840A3E /* Post.swift in Sources */,
 				3C913C551DDA3C7700C11713 /* LoginViewController.swift in Sources */,
 				3C913C521DDA3B0B00C11713 /* Request.swift in Sources */,
