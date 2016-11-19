@@ -23,9 +23,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Set title font
-        //self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "CaviarDreams", size: 20)!]
 
         //Get user info
         let defaults = UserDefaults.standard

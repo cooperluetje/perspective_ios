@@ -72,7 +72,7 @@ class ApiRoutes
         let api = "https://perspective-koopaluigi.c9users.io/api/microposts"       //Testing
         
         var getUserMicroposts:String        // GET     (use page)  ()
-        var createPost:String               // POST    ()          (name, email, username, password, password_confirmation)
+        var createPost:String               // POST    ()          (picture-base64, location)
         
         init()
         {

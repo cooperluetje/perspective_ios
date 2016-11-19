@@ -164,13 +164,12 @@ class UserService
                 let innerVal = val[i]! as AnyObject
                 
                 let id = innerVal.value(forKey: "id")! as! Int
-                let content = innerVal.value(forKey: "content")! as! String
                 let user_id = innerVal.value(forKey: "user_id")! as! Int
                 let created_at = innerVal.value(forKey: "created_at")! as! String
                 let updated_at = innerVal.value(forKey: "updated_at") as! String
                 let picture = innerVal.value(forKey: "picture")! as AnyObject
                 let picture_url = picture.value(forKey: "url") as! String
-                let post = Post(id: id, content: content, user_id: user_id, created_at: created_at, updated_at: updated_at, picture_url: picture_url)
+                let post = Post(id: id, content: "", user_id: user_id, created_at: created_at, updated_at: updated_at, picture_url: picture_url)
                 posts.append(post)
             }
         }

@@ -24,6 +24,7 @@
 		3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */; };
 		3CEA0C8F1DDFE4D2004316B8 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8E1DDFE4D2004316B8 /* Time.swift */; };
 		3CEA0C911DE0344E004316B8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C901DE0344E004316B8 /* CameraViewController.swift */; };
+		3CEA0C931DE05A57004316B8 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C921DE05A57004316B8 /* PostService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3CEA0C8E1DDFE4D2004316B8 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		3CEA0C901DE0344E004316B8 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3CEA0C921DE05A57004316B8 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				3C54049F1DB6FFC600253A00 /* Info.plist */,
 				3C913C561DDAAF2A00C11713 /* SessionService.swift */,
 				3C4FC59C1DDBEF8C00840A3E /* UserService.swift */,
+				3CEA0C921DE05A57004316B8 /* PostService.swift */,
 				3C913C511DDA3B0B00C11713 /* Request.swift */,
 				3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */,
 				3CC6C6811DDE968F0062F39F /* Perspective-Bridging-Header.h */,
@@ -267,6 +270,7 @@
 				3C913C551DDA3C7700C11713 /* LoginViewController.swift in Sources */,
 				3C913C521DDA3B0B00C11713 /* Request.swift in Sources */,
 				3C4FC59D1DDBEF8C00840A3E /* UserService.swift in Sources */,
+				3CEA0C931DE05A57004316B8 /* PostService.swift in Sources */,
 				3C913C5A1DDAAFA400C11713 /* User.swift in Sources */,
 				3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */,
 				3C913C5C1DDAB40600C11713 /* ApiRoutes.swift in Sources */,

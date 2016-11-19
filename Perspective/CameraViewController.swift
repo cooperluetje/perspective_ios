@@ -8,34 +8,37 @@
 
 import UIKit
 import AVFoundation
+import CoreLocation
 
-class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate
+class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLLocationManagerDelegate
 {
     // MARK: Properties
     @IBOutlet weak var cameraView: UIImageView!
     @IBOutlet weak var previewView: UIView!
-    //let picker = UIImagePickerController()
+    @IBOutlet weak var discardButtonVar: UIButton!
+    @IBOutlet weak var acceptButtonVar: UIButton!
     var captureSession:AVCaptureSession?
     var imageOutput:AVCaptureStillImageOutput?
     var previewLayer:AVCaptureVideoPreviewLayer?
+    var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
+    var postService = PostService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
+    let locationManager = CLLocationManager()
+    var apiRoutes = ApiRoutes()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        self.picker.sourceType = UIImagePickerControllerSourceType.camera
-        self.picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
-        self.picker.cameraDevice = UIImagePickerControllerCameraDevice.rear
-        self.picker.showsCameraControls = true
-        self.picker.isNavigationBarHidden = true
-        self.picker.isToolbarHidden = true
-        self.picker.modalPresentationStyle = .custom
-        self.cameraView.image = UIImagePickerControllerOriginalImage
-        self.picker.cameraOverlayView = cameraView
         
-        self.present(picker, animated: true, completion: nil)
-        */
-        
-        
+        //Get user info
+        let defaults = UserDefaults.standard
+        let key = "user"
+        if defaults.object(forKey: key) != nil
+        {
+            if let value = defaults.object(forKey: key) as? NSData
+            {
+                user = NSKeyedUnarchiver.unarchiveObject(with: value as Data) as! User
+                postService = PostService(user: user)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -100,6 +103,29 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate
             })
         }
         self.previewView.isHidden = true
+        self.acceptButtonVar.isHidden = false
+        self.discardButtonVar.isHidden = false
+    }
+    
+    @IBAction func discardButton(_ sender: UIButton)
+    {
+        self.previewView.isHidden = false
+        self.acceptButtonVar.isHidden = true
+        self.discardButtonVar.isHidden = true
+    }
+    
+    @IBAction func acceptButton(_ sender: UIButton)
+    {
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            let location:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
+            postService.createPost(image: self.cameraView.image!, latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+        }
     }
     
     override func didReceiveMemoryWarning() {
