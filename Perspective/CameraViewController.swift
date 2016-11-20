@@ -17,6 +17,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var discardButtonVar: UIButton!
     @IBOutlet weak var acceptButtonVar: UIButton!
+    @IBOutlet weak var photoButtonVar: UIButton!
+    @IBOutlet weak var imageIndicator: UIActivityIndicatorView!
     var captureSession:AVCaptureSession?
     var imageOutput:AVCaptureStillImageOutput?
     var previewLayer:AVCaptureVideoPreviewLayer?
@@ -104,6 +106,9 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
         self.previewView.isHidden = true
         self.acceptButtonVar.isHidden = false
         self.discardButtonVar.isHidden = false
+        self.photoButtonVar.isHidden = true
+        self.imageIndicator.isHidden = false
+        //self.imageIndicator.isHidden = true
     }    
     
     @IBAction func discardButton(_ sender: UIButton)
@@ -111,6 +116,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
         self.previewView.isHidden = false
         self.acceptButtonVar.isHidden = true
         self.discardButtonVar.isHidden = true
+        self.photoButtonVar.isHidden = false
+        self.cameraView.image = nil
     }
     
     @IBAction func acceptButton(_ sender: UIButton)

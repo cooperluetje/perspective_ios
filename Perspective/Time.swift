@@ -33,48 +33,52 @@ class Time
         
         if seconds < 59.0
         {
-            returnString = "\(Int(round(seconds))) seconds ago"
+            returnString = "\(Int(round(seconds))) SECONDS AGO"
         }
         else if seconds < minutes_in_seconds + (minutes_in_seconds - 1)
         {
-            returnString = "1 minute ago"
+            returnString = "1 MINUTE AGO"
         }
         else if seconds < hours_in_seconds - minutes_in_seconds
         {
             let minutes = Int(round(seconds / minutes_in_seconds))
-            returnString = "\(minutes) minutes ago"
+            returnString = "\(minutes) MINUTES AGO"
         }
         else if seconds < hours_in_seconds + (hours_in_seconds - minutes_in_seconds)
         {
-            returnString = "1 hour ago"
+            returnString = "1 HOUR AGO"
         }
         else if seconds < day_in_seconds - hours_in_seconds
         {
             let hours = Int(round(seconds / hours_in_seconds))
-            returnString = "\(hours) hours ago"
+            returnString = "\(hours) HOURS AGO"
         }
         else if seconds < day_in_seconds + (day_in_seconds - hours_in_seconds)
         {
-            returnString = "1 day ago"
+            returnString = "1 DAY AGO"
         }
         else if seconds < month_in_seconds - day_in_seconds
         {
             let days = Int(round(seconds / day_in_seconds))
-            returnString = "\(days) days ago"
+            returnString = "\(days) DAYS AGO"
         }
         else if seconds < month_in_seconds + (month_in_seconds - day_in_seconds)
         {
-            returnString = "1 month ago"
+            returnString = "1 MONTH AGO"
         }
         else if seconds < year_in_seconds - month_in_seconds
         {
             let months = Int(round(seconds / month_in_seconds))
-            returnString = "\(months) months ago"
+            returnString = "\(months) MONTHS AGO"
+        }
+        else if seconds < year_in_seconds + (year_in_seconds - month_in_seconds)
+        {
+            returnString = "1 YEAR AGO"
         }
         else if seconds < year_in_seconds * 99
         {
-            let months = Int(round(seconds / year_in_seconds))
-            returnString = "\(months) months ago"
+            let years = Int(round(seconds / year_in_seconds))
+            returnString = "\(years) YEARS AGO"
         }
         
         return returnString
