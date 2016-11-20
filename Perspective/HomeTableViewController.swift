@@ -18,11 +18,15 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     var apiRoutes = ApiRoutes()
     var time = Time()
     var feed:[Post] = []
+    var feedImages:[UIImage] = []
+    var userImages:[UIImage] = []
     var page_num = 1
     var currentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.refreshControl?.addTarget(self, action: #selector(HomeTableViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
 
         //Get user info
         let defaults = UserDefaults.standard
@@ -48,6 +52,44 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         }
         
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
+        for post in feed
+        {
+            let user = userService.getUser(user_id: post.user_id)
+            let gravatarData = MD5(string: user.email)
+            let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
+            var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
+            
+            //User profile images
+            var data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                userImages.append(UIImage(data: data)!)
+            }
+            
+            //Feed images
+            url = URL(string: apiRoutes.homeUrl + post.picture_url)
+            data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                feedImages.append(UIImage(data: data)!)
+            }
+        }
         page_num += 1
         
         indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)        
@@ -68,9 +110,56 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     {
         if indexPath.row == feed.count
         {
-            feed.append(contentsOf: userService.getUserFeed(user_id: user.id, page_num: page_num))
-            page_num += 1
-            tableView.reloadData()
+            let newFeed:[Post] = userService.getUserFeed(user_id: user.id, page_num: page_num)
+            if newFeed != []
+            {
+                feed.append(contentsOf: newFeed)
+                for post in newFeed
+                {
+                    let user = userService.getUser(user_id: post.user_id)
+                    let gravatarData = MD5(string: user.email)
+                    let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
+                    var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
+                    
+                    //User profile images
+                    var data = Data()
+                    do
+                    {
+                        data = try Data(contentsOf: url!)
+                    }
+                    catch let error as NSError
+                    {
+                        print("ERROR: \(error.localizedDescription)")
+                    }
+                    if data.count != 0
+                    {
+                        userImages.append(UIImage(data: data)!)
+                    }
+                    
+                    //Feed images
+                    url = URL(string: apiRoutes.homeUrl + post.picture_url)
+                    data = Data()
+                    do
+                    {
+                        data = try Data(contentsOf: url!)
+                    }
+                    catch let error as NSError
+                    {
+                        print("ERROR: \(error.localizedDescription)")
+                    }
+                    if data.count != 0
+                    {
+                        feedImages.append(UIImage(data: data)!)
+                    }
+                }
+                page_num += 1
+                tableView.reloadData()
+            }
+            else
+            {
+                // End of data
+                indicator.stopAnimating()
+            }
         }
     }
 
@@ -98,47 +187,14 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
             let post = feed[indexPath.row]
             let user = userService.getUser(user_id: post.user_id)
-            let gravatarData = MD5(string: user.email)
-            let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
-            var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
-            var data = Data()
-            do
-            {
-                data = try Data(contentsOf: url!)
-            }
-            catch let error as NSError
-            {
-                print("ERROR: \(error.localizedDescription)")
-            }
-            if data.count != 0
-            {
-                cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
-                cell.userImage.image = UIImage(data: data)
-            }
+            
+            cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
+            cell.userImage.image = userImages[indexPath.row]
+            
             cell.usernameLabel.text = user.username
             
-            url = URL(string: apiRoutes.homeUrl + post.picture_url)
-            data = Data()
-            do
-            {
-                data = try Data(contentsOf: url!)
-            }
-            catch let error as NSError
-            {
-                print("ERROR: \(error.localizedDescription)")
-            }
-            if data.count != 0
-            {
-                //cell.mainImage.contentMode = UIViewContentMode.scaleAspectFit
-                cell.mainImage.image = UIImage(data: data)
-            }
+            cell.mainImage.image = feedImages[indexPath.row]
             
-            /*
-             let dateFormatter = DateFormatter()
-             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sssz"
-             let date = dateFormatter!.date(from: post.created_at)!
-             dateFormatter.dateFormat = "MM-dd-yyyy"
-             */
             cell.dateLabel.text = time.timeAgoInWords(dateString: post.created_at)
             
             let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
@@ -168,6 +224,15 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         {
             return 464
         }
+    }
+    
+    func handleRefresh(refreshControl:UIRefreshControl)
+    {
+        page_num = 1
+        feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     //For gravatar
