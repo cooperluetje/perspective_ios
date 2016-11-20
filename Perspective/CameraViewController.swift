@@ -96,16 +96,15 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
                     let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                     let dataProvider = CGDataProvider(data: data as! CFData)
                     let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
-                    
                     let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
-                    self.cameraView.image = image
+                    self.cameraView.image = self.cropImage(image: image)
                 }
             })
         }
         self.previewView.isHidden = true
         self.acceptButtonVar.isHidden = false
         self.discardButtonVar.isHidden = false
-    }
+    }    
     
     @IBAction func discardButton(_ sender: UIButton)
     {
@@ -124,9 +123,43 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
             let location:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
-            postService.createPost(image: self.cameraView.image!, latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+            _ = postService.createPost(image: self.cameraView.image!, latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
             UIImageWriteToSavedPhotosAlbum(self.cameraView.image!, nil, nil, nil)
         }
+    }
+    
+    func cropImage(image: UIImage) -> UIImage
+    {
+        let contextImage:UIImage = UIImage(cgImage: image.cgImage!)
+        let contextSize:CGSize = contextImage.size
+        
+        var x:CGFloat = 0.0
+        var y:CGFloat = 0.0
+        var cgWidth:CGFloat = CGFloat(previewView.bounds.width)
+        var cgHeight:CGFloat = CGFloat(previewView.bounds.height)
+        
+        if contextSize.width > contextSize.height
+        {
+            x = ((contextSize.width - contextSize.height) / 2)
+            y = 0
+            cgWidth = contextSize.height
+            cgHeight = contextSize.height
+        }
+        else
+        {
+            x = 0
+            y = ((contextSize.height - contextSize.width) / 2)
+            cgWidth = contextSize.width
+            cgHeight = contextSize.width
+        }
+        
+        let rect:CGRect = CGRect(x: x, y: y, width: cgWidth, height: cgHeight)
+        
+        let imageRef:CGImage = image.cgImage!.cropping(to: rect)!
+        
+        let image:UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        
+        return image
     }
     
     override func didReceiveMemoryWarning() {
