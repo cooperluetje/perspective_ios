@@ -45,46 +45,56 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
     
     override func viewWillAppear(_ animated: Bool)
     {
-        captureSession = AVCaptureSession()
-        captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
-        
-        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        
-        var error:Error?
-        var input:AVCaptureDeviceInput!
-        do
+        if UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
-            input = try AVCaptureDeviceInput(device: backCamera)
-        }
-        catch let err as NSError
-        {
-            error = err
-            input = nil
-        }
-        if error == nil && captureSession!.canAddInput(input)
-        {
-            captureSession!.addInput(input)
-            imageOutput = AVCaptureStillImageOutput()
-            imageOutput!.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-            if captureSession!.canAddOutput(imageOutput)
-            {
-                captureSession!.addOutput(imageOutput)
-                
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                previewView.layer.addSublayer(previewLayer!)
-                
-                captureSession!.startRunning()
-            }
+            captureSession = AVCaptureSession()
+            captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
             
+            let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            
+            var error:Error?
+            var input:AVCaptureDeviceInput!
+            do
+            {
+                input = try AVCaptureDeviceInput(device: backCamera)
+            }
+            catch let err as NSError
+            {
+                error = err
+                input = nil
+            }
+            if error == nil && captureSession!.canAddInput(input)
+            {
+                captureSession!.addInput(input)
+                imageOutput = AVCaptureStillImageOutput()
+                imageOutput!.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+                if captureSession!.canAddOutput(imageOutput)
+                {
+                    captureSession!.addOutput(imageOutput)
+                    
+                    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                    previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+                    previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+                    previewView.layer.addSublayer(previewLayer!)
+                    
+                    captureSession!.startRunning()
+                }
+            }
         }
+        else
+        {
+            photoButtonVar.isEnabled = false
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        previewLayer!.frame = previewView.bounds
+        if previewLayer != nil
+        {
+            previewLayer!.frame = previewView.bounds
+        }
     }
     
     @IBAction func photoButton(_ sender: UIButton)

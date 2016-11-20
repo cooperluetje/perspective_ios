@@ -307,7 +307,7 @@
         <scene sceneID="J1O-Cd-CMT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lit-Ha-iCu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Camera" id="oZH-MY-VaB"/>
+                    <tabBarItem key="tabBarItem" title="Camera" image="CameraIcon" id="oZH-MY-VaB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1qc-ke-Jsw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -324,6 +324,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CameraIcon" width="25" height="25"/>
         <image name="HomeIcon" width="25" height="25"/>
     </resources>
 </document>

@@ -47,8 +47,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            let location:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
-            userService.updateLocation(latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+            if locationManager.location != nil
+            {
+                let location:CLLocationCoordinate2D = locationManager.location!.coordinate
+                userService.updateLocation(latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+            }
         }
         
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
@@ -99,12 +102,6 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     {
         
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        //let location = manager.location?.coordinate
-    }
-    
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
@@ -228,8 +225,57 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     
     func handleRefresh(refreshControl:UIRefreshControl)
     {
+        //Update location
+        if locationManager.location != nil
+        {
+            let location:CLLocationCoordinate2D = locationManager.location!.coordinate
+            userService.updateLocation(latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
+        }
+        
+        //Update feed
         page_num = 1
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
+        feedImages = []
+        userImages = []
+        for post in feed
+        {
+            let user = userService.getUser(user_id: post.user_id)
+            let gravatarData = MD5(string: user.email)
+            let gravatarHex = gravatarData!.map { String(format: "%02hhx", $0) }.joined()
+            var url = URL(string: apiRoutes.gravatarUrl + gravatarHex)
+            
+            //User profile images
+            var data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                userImages.append(UIImage(data: data)!)
+            }
+            
+            //Feed images
+            url = URL(string: apiRoutes.homeUrl + post.picture_url)
+            data = Data()
+            do
+            {
+                data = try Data(contentsOf: url!)
+            }
+            catch let error as NSError
+            {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            if data.count != 0
+            {
+                feedImages.append(UIImage(data: data)!)
+            }
+        }
+        page_num += 1
         
         self.tableView.reloadData()
         refreshControl.endRefreshing()

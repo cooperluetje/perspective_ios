@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //Style for tab bar
+        UITabBar.appearance().barStyle = UIBarStyle.black
+        UITabBar.appearance().tintColor = UIColor.white        
+        
         //Style for nav bars
         if let font = UIFont(name: "Helvetica-Bold", size: 20)
         {
