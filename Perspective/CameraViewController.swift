@@ -141,7 +141,14 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, CLL
             locationManager.startUpdatingLocation()
             let location:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
             _ = postService.createPost(image: self.cameraView.image!, latitude: "\(location.latitude)", longitude: "\(location.longitude)", auth_token: user.auth_token)
-            UIImageWriteToSavedPhotosAlbum(self.cameraView.image!, nil, nil, nil)
+            
+            self.previewView.isHidden = false
+            self.acceptButtonVar.isHidden = true
+            self.discardButtonVar.isHidden = true
+            self.photoButtonVar.isHidden = false
+            self.cameraView.image = nil
+            
+            self.tabBarController?.selectedIndex = 0
         }
     }
     
