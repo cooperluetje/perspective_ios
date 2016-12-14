@@ -11,9 +11,11 @@ import CoreLocation
 
 class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
 {
+    // MARK: Properties
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     let locationManager = CLLocationManager()
     var apiRoutes = ApiRoutes()
     var time = Time()
@@ -22,6 +24,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     var userImages:[UIImage] = []
     var page_num = 1
     var currentIndex = 0
+    var viewAppeared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,12 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             }
         }
         
+        indicator.isHidden = false
+        indicator.startAnimating()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
@@ -95,20 +104,17 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         }
         page_num += 1
         
-        indicator.center = CGPoint.init(x: self.view.bounds.width / 2.0, y: indicator.center.y + 11)        
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        
+        viewAppeared = true
+        //indicator.isHidden = true
+        self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        if indexPath.row == feed.count
+        if indexPath.row == feed.count-1
         {
             let newFeed:[Post] = userService.getUserFeed(user_id: user.id, page_num: page_num)
-            if newFeed != []
+            if newFeed != [] && viewAppeared
             {
                 feed.append(contentsOf: newFeed)
                 for post in newFeed
@@ -155,7 +161,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             else
             {
                 // End of data
-                indicator.stopAnimating()
+                indicator.isHidden = true
             }
         }
     }
@@ -174,53 +180,29 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return feed.count+1
+        return feed.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if indexPath.row <= feed.count-1
-        {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
-            let post = feed[indexPath.row]
-            let user = userService.getUser(user_id: post.user_id)
-            
-            cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
-            cell.userImage.image = userImages[indexPath.row]
-            
-            cell.usernameLabel.text = user.username
-            
-            cell.mainImage.image = feedImages[indexPath.row]
-            
-            cell.dateLabel.text = time.timeAgoInWords(dateString: post.created_at)
-            
-            let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
-            bottom_border.backgroundColor = UIColor.lightGray
-            cell.addSubview(bottom_border)
-            
-            return cell
-        }
-        else
-        {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) 
-            
-            indicator.startAnimating()
-            cell.addSubview(indicator)
-            
-            return cell
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        if indexPath.row > feed.count-1
-        {
-            return 44
-        }
-        else
-        {
-            return 464
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
+        let post = feed[indexPath.row]
+        let user = userService.getUser(user_id: post.user_id)
+        
+        cell.userImage.contentMode = UIViewContentMode.scaleAspectFit
+        cell.userImage.image = userImages[indexPath.row]
+        
+        cell.usernameLabel.text = user.username
+        
+        cell.mainImage.image = feedImages[indexPath.row]
+        
+        cell.dateLabel.text = time.timeAgoInWords(dateString: post.created_at)
+        
+        let bottom_border = UIView(frame: CGRect(x: 0, y: 463, width: self.view.bounds.width, height: 1))
+        bottom_border.backgroundColor = UIColor.lightGray
+        cell.addSubview(bottom_border)
+        
+        return cell
     }
     
     func handleRefresh(refreshControl:UIRefreshControl)
