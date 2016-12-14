@@ -93,7 +93,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hhi-no-6C5">
             <objects>
-                <tabBarController id="BoA-o3-HYp" customClass="TabBarController" customModule="Perspective" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="BoA-o3-HYp" customClass="TabBarController" customModule="Perspective" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Feh-1C-W2S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
