@@ -32,7 +32,7 @@ class PostService
     {
         var micropost_id = -1
         //Create base64 data of image
-        let imageData:Data = UIImageJPEGRepresentation(image, 1)!
+        let imageData:Data = UIImageJPEGRepresentation(image, 0.1)!
         let base64Data:String = imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
         
         let request = DispatchGroup.init()
