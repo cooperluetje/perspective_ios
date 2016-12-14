@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="-106" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="VWj-h1-0TF">
             <objects>
-                <viewController id="JaA-MD-pcq" sceneMemberID="viewController">
+                <viewController id="JaA-MD-pcq" customClass="SettingsViewController" customModule="Perspective" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zpF-4H-dcf"/>
                         <viewControllerLayoutGuide type="bottom" id="5eF-Qb-E4g"/>
@@ -82,13 +82,29 @@
                     <view key="view" contentMode="scaleToFill" id="woP-lZ-oQg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggf-eL-xcx">
+                                <rect key="frame" x="137" y="318" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutButton:" destination="JaA-MD-pcq" eventType="touchUpInside" id="NAS-TV-Gbc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" systemItem="more" id="OdE-bz-LRe"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logOut" id="gdw-Kg-H9u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWa-uC-3or" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1710" y="1218"/>
+            <point key="canvasLocation" x="1709.5999999999999" y="1217.5412293853074"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hhi-no-6C5">

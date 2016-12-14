@@ -21,6 +21,7 @@
 		3C913C5C1DDAB40600C11713 /* ApiRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */; };
 		3C913C5E1DDACE8500C11713 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */; };
 		3C913C611DDACEF200C11713 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C913C601DDACEF200C11713 /* MainTableViewCell.swift */; };
+		3CA1C2661E01EAA1005FDD95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1C2651E01EAA1005FDD95 /* SettingsViewController.swift */; };
 		3CEA0C8D1DDEE985004316B8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */; };
 		3CEA0C8F1DDFE4D2004316B8 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C8E1DDFE4D2004316B8 /* Time.swift */; };
 		3CEA0C911DE0344E004316B8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA0C901DE0344E004316B8 /* CameraViewController.swift */; };
@@ -56,6 +57,7 @@
 		3C913C5B1DDAB40600C11713 /* ApiRoutes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRoutes.swift; sourceTree = "<group>"; };
 		3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		3C913C601DDACEF200C11713 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		3CA1C2651E01EAA1005FDD95 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3CC6C6811DDE968F0062F39F /* Perspective-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Perspective-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3CEA0C8E1DDFE4D2004316B8 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				3C913C5D1DDACE8500C11713 /* HomeTableViewController.swift */,
 				3CEA0C8C1DDEE985004316B8 /* TabBarController.swift */,
 				3CEA0C901DE0344E004316B8 /* CameraViewController.swift */,
+				3CA1C2651E01EAA1005FDD95 /* SettingsViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				3C4FC59F1DDE280800840A3E /* Post.swift in Sources */,
 				3C913C551DDA3C7700C11713 /* LoginViewController.swift in Sources */,
 				3C913C521DDA3B0B00C11713 /* Request.swift in Sources */,
+				3CA1C2661E01EAA1005FDD95 /* SettingsViewController.swift in Sources */,
 				3C4FC59D1DDBEF8C00840A3E /* UserService.swift in Sources */,
 				3CEA0C931DE05A57004316B8 /* PostService.swift in Sources */,
 				3C913C5A1DDAAFA400C11713 /* User.swift in Sources */,
