@@ -109,6 +109,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         self.tableView.reloadData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        viewAppeared = false
+        page_num = 1
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         if indexPath.row == feed.count-1

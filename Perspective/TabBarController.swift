@@ -27,8 +27,12 @@ class TabBarController: UITabBarController {
         {
             let navController = self.viewControllers?.first as! UINavigationController
             let homeController = navController.viewControllers.first as! HomeTableViewController
-            let indexPath = IndexPath.init(row: 0, section: 0)
-            homeController.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            if homeController.feed.count > 0
+            {
+                let indexPath = IndexPath.init(row: 0, section: 0)
+                homeController.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                homeController.tableView.reloadData()
+            }
         }
     }
 
