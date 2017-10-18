@@ -21,13 +21,15 @@ class ApiRoutes
         self.session = Session()
         self.user = User()
         self.posts = Posts()
-        self.homeUrl = "https://perspective-koopaluigi.c9users.io"
+        //self.homeUrl = "https://perspective-koopaluigi.c9users.io"
+        self.homeUrl = "https://infinite-brushlands-36763.herokuapp.com"
         self.gravatarUrl = "https://www.gravatar.com/avatar/"
     }
     
     struct Session
     {
-        let api = "https://perspective-koopaluigi.c9users.io/api/login"       //Testing
+        //let api = "https://perspective-koopaluigi.c9users.io/api/login"       //Testing
+        let api = "https://infinite-brushlands-36763.herokuapp.com/api/login"
         
         var login:String                    // POST     ()          (username, password)
         
@@ -44,7 +46,8 @@ class ApiRoutes
     
     struct User
     {
-        let api = "https://perspective-koopaluigi.c9users.io/api/users"       //Testing
+        //let api = "https://perspective-koopaluigi.c9users.io/api/users"       //Testing
+        let api = "https://infinite-brushlands-36763.herokuapp.com/api/users"
         
         var getAllUsers:String              // GET     ()          ()
         var getUser:String                  // GET     (use id)    ()
@@ -58,7 +61,8 @@ class ApiRoutes
             getUser = api + "/"
             createUser = api + "/"
             getFeed = api + ""
-            updateLocation = "https://perspective-koopaluigi.c9users.io/api/locations"
+            //updateLocation = "https://perspective-koopaluigi.c9users.io/api/locations"
+            updateLocation = "https://infinite-brushlands-36763.herokuapp.com/api/locations"
         }
         
         func indexForId() -> String.Index
@@ -69,7 +73,8 @@ class ApiRoutes
     
     struct Posts
     {
-        let api = "https://perspective-koopaluigi.c9users.io/api/microposts"       //Testing
+        //let api = "https://perspective-koopaluigi.c9users.io/api/microposts"       //Testing
+        let api = "https://infinite-brushlands-36763.herokuapp.com/api/microposts"
         
         var getUserMicroposts:String        // GET     (use page)  ()
         var createPost:String               // POST    ()          (picture-base64, location)
@@ -85,36 +90,4 @@ class ApiRoutes
             return api.endIndex
         }
     }
-    
-    /*
-    struct Users
-    {
-        let api = "https://baseballsim-koopaluigi.c9users.io/api/users"       //Testing
-        //let api = "https://baseballsim.herokuapp.com/api/users"                 //Heroku
-        
-        var getUsers:String         // GET      ()          ()
-        var getUserTeams:String     // GET      (use id)    ()
-        var getUserGames:String     // GET      (use id)    ()
-        var createUser:String       // POST     ()          (username, password, firstname, lastname, email)
-        var token:String            // POST     ()          (username, password)
-        var validate:String         // POST     ()          (token)
-        var deleteUserById:String   // DELETE   (use id)    ()
-        
-        init()
-        {
-            getUsers = api + "/"
-            getUserTeams = api + "/teams"
-            getUserGames = api + "/games"
-            createUser = api + "/"
-            token = api + "/token"
-            validate = api + "/validate"
-            deleteUserById = api + "/"
-        }
-        
-        func indexForId() -> String.Index
-        {
-            return api.endIndex
-        }
-    }
-    */
 }
