@@ -13,6 +13,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
 {
     // MARK: Properties
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var noPostsLabel: UILabel!
     
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
@@ -25,6 +26,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     var page_num = 1
     var currentIndex = 0
     var viewAppeared = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.noPostsLabel.isHidden = true;
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +92,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             }
             
             //Feed images
-            url = URL(string: apiRoutes.homeUrl + post.picture_url)
+            url = URL(string: post.picture_url)     //Must add apiRoutes.homeUrl if development server
             data = Data()
             do
             {
@@ -145,7 +150,8 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
                     }
                     
                     //Feed images
-                    url = URL(string: apiRoutes.homeUrl + post.picture_url)
+                    
+                    url = URL(string: post.picture_url)     //Must add apiRoutes.homeUrl if development server
                     data = Data()
                     do
                     {
@@ -247,7 +253,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             }
             
             //Feed images
-            url = URL(string: apiRoutes.homeUrl + post.picture_url)
+            url = URL(string: post.picture_url)     //Must add apiRoutes.homeUrl if development server
             data = Data()
             do
             {
