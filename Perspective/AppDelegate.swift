@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         //Style for tab bar
         UITabBar.appearance().barStyle = UIBarStyle.black
+        UITabBar.appearance().barTintColor = UIColor(red: 43/255, green: 61/255, blue: 107/255, alpha:1.0)
         UITabBar.appearance().tintColor = UIColor.white        
         
         //Style for nav bars
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         {
             UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: font]
             UINavigationBar.appearance().barStyle = UIBarStyle.black
+            UINavigationBar.appearance().barTintColor = UIColor(red: 43/255, green: 61/255, blue: 107/255, alpha:1.0)
             UINavigationBar.appearance().tintColor = UIColor.white
         }
         
