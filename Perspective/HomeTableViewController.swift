@@ -28,7 +28,7 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
     var viewAppeared = false
     
     override func viewWillAppear(_ animated: Bool) {
-        self.noPostsLabel.isHidden = true;
+        self.noPostsLabel.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -110,7 +110,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         page_num += 1
         
         viewAppeared = true
-        //indicator.isHidden = true
+        if feed == []
+        {
+            indicator.isHidden = true
+            noPostsLabel.isHidden = false
+        }
         self.tableView.reloadData()
     }
     
@@ -126,6 +130,8 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             let newFeed:[Post] = userService.getUserFeed(user_id: user.id, page_num: page_num)
             if newFeed != [] && viewAppeared
             {
+                noPostsLabel.isHidden = true;
+                indicator.isHidden = false;
                 feed.append(contentsOf: newFeed)
                 for post in newFeed
                 {
@@ -173,6 +179,10 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
             {
                 // End of data
                 indicator.isHidden = true
+                if feed == []
+                {
+                    noPostsLabel.isHidden = false
+                }
             }
         }
     }
@@ -228,6 +238,11 @@ class HomeTableViewController: UITableViewController, CLLocationManagerDelegate
         //Update feed
         page_num = 1
         feed = userService.getUserFeed(user_id: user.id, page_num: page_num)
+        if feed == []
+        {
+            indicator.isHidden = true;
+            noPostsLabel.isHidden = false;            
+        }
         feedImages = []
         userImages = []
         for post in feed
