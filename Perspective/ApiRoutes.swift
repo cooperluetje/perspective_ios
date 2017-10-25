@@ -81,7 +81,7 @@ class ApiRoutes
         
         init()
         {
-            getUserMicroposts = api + "/"
+            getUserMicroposts = api + ""
             createPost = api + "/"
         }
         
