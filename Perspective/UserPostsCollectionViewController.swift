@@ -8,9 +8,9 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "userPostCell"
 
-class UserPostsCollectionViewController: UICollectionViewController
+class UserPostsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     var user = User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: "")
     var userService = UserService(user: User(id: -1, name: "", email: "", username: "", created_at: "", updated_at: "", auth_token: ""))
@@ -19,6 +19,8 @@ class UserPostsCollectionViewController: UICollectionViewController
     var feedImages:[UIImage] = []
     var page_num = 1
     var viewAppeared = false
+    let cellsPerRow:CGFloat = 3.2
+    var flowLayout:UICollectionViewFlowLayout?;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class UserPostsCollectionViewController: UICollectionViewController
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         //Get user info
@@ -41,9 +43,11 @@ class UserPostsCollectionViewController: UICollectionViewController
                 userService = UserService(user: user)
             }
         }
+        flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        page_num = 1
         feed = userService.getUserPosts(page_num: page_num)
         for post in feed
         {
@@ -93,12 +97,34 @@ class UserPostsCollectionViewController: UICollectionViewController
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserPostsCollectionViewCell
     
         // Configure the cell
-        cell.backgroundColor = UIColor.black
+        cell.postImageView.image = feedImages[indexPath.row]
+        cell.backgroundColor = UIColor.white
     
         return cell
+    }
+    
+    // MARK: - Flow Layout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        let padding = (flowLayout?.sectionInset.left)! * (cellsPerRow + 1)
+        let width = view.frame.width - padding
+        let widthPerCell = width / cellsPerRow
+        
+        return CGSize(width:widthPerCell, height:widthPerCell)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+    {
+        return flowLayout!.sectionInset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
+        return 10.0
     }
     
     /*

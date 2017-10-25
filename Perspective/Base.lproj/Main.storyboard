@@ -428,12 +428,27 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userPostCell" id="h2E-fS-rka" customClass="UserPostsCollectionViewCell" customModule="Perspective" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PerspectiveIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0pF-lx-szr">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="0pF-lx-szr" firstAttribute="leading" secondItem="h2E-fS-rka" secondAttribute="leading" id="ApH-hw-Gcf"/>
+                                    <constraint firstAttribute="bottom" secondItem="0pF-lx-szr" secondAttribute="bottom" id="Zyp-Na-5Eq"/>
+                                    <constraint firstAttribute="trailing" secondItem="0pF-lx-szr" secondAttribute="trailing" id="ipL-hR-vPS"/>
+                                    <constraint firstItem="0pF-lx-szr" firstAttribute="top" secondItem="h2E-fS-rka" secondAttribute="top" id="xg7-xQ-h6U"/>
+                                </constraints>
+                                <size key="customSize" width="200" height="200"/>
+                                <connections>
+                                    <outlet property="postImageView" destination="0pF-lx-szr" id="ZvZ-YC-z4i"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -445,7 +460,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVv-JX-arS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="1059"/>
+            <point key="canvasLocation" x="2580" y="1058.3208395802101"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dpC-0a-itw">
@@ -489,6 +504,7 @@
     <resources>
         <image name="CameraIcon" width="25" height="25"/>
         <image name="HomeIcon" width="25" height="25"/>
+        <image name="PerspectiveIcon" width="512" height="512"/>
         <image name="UserPostsIcon" width="25" height="25"/>
     </resources>
 </document>
