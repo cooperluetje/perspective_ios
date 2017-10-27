@@ -32,10 +32,12 @@ class ApiRoutes
         let api = "https://infinite-brushlands-36763.herokuapp.com/api/login"
         
         var login:String                    // POST     ()          (username, password)
+        var verify:String                   // POST     ()          (username, token)
         
         init()
         {
             login = api + "/"
+            verify = "https://infinite-brushlands-36763.herokuapp.com/api/verify"
         }
         
         func indexForId() -> String.Index

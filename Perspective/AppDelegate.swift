@@ -64,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 {                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+                    let sessionService:SessionService = SessionService()
+                    sessionService.verify(username: user.username, auth_token: user.auth_token)
                     
                     self.window?.rootViewController = viewController
                 }

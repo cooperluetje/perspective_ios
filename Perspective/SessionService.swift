@@ -83,4 +83,36 @@ class SessionService
         return user
     }
     
+    func verify(username:String, auth_token:String)
+    {
+        let request = DispatchGroup.init()
+        
+        let url = apiRoutes.session.verify
+        
+        let innerParams = ["username" : username, "token" : auth_token]
+        
+        let params = ["session" : innerParams]
+        
+        var jsonData:Data = Data()
+        do
+        {
+            jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        }
+        catch let error as NSError
+        {
+            print("ERROR: \(error.localizedDescription)")
+        }
+        
+        let headers = ["Content-Type" : "application/json"]
+        
+        request.enter()
+        
+        requests.postRequest(url: url, params: (params as [String : AnyObject]?)!, headers: headers, jsonData: jsonData, finished: {
+            () in
+            request.leave()
+        })
+        
+        request.wait()
+    }
+    
 }
